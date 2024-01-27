@@ -1,7 +1,10 @@
-mod app;
+mod components;
+mod model;
+mod rendering;
 
-use app::App;
+use components::Slideshow;
 
 fn main() {
-    yew::Renderer::<App>::new().render();
+    wasm_logger::init(wasm_logger::Config::default());
+    yew::Renderer::<Slideshow>::new().render();
 }
