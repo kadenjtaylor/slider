@@ -4,9 +4,9 @@ target = "index.html"
 # The output dir for all final assets.
 dist = "dist"
 # Root where we're serving from
-public_url = "./"
+# public_url = "./"
 # Keep hashes in file names
-filehash = false
+# filehash = false
 
 [clean]
 # The output dir for all final assets.

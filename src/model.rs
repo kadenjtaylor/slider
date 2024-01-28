@@ -1,12 +1,13 @@
-pub struct FillInBlank<'a> {
-    before: &'a str,
-    blank: &'a str,
-    after: &'a str,
-}
-
 pub enum TriviaQuestion<'a> {
-    QAndA { question: &'a str, answer: &'a str },
-    FillInBlank(FillInBlank<'a>),
+    QAndA {
+        question: &'a str,
+        answer: &'a str,
+    },
+    FillInBlank {
+        before: &'a str,
+        blank: &'a str,
+        after: &'a str,
+    },
 }
 
 pub enum Slide<'a> {
@@ -14,6 +15,6 @@ pub enum Slide<'a> {
         major: &'a str,
         minor: Option<&'a str>,
     },
-    Question(TriviaQuestion<'a>),
-    Reveal(TriviaQuestion<'a>),
+    Question(&'a TriviaQuestion<'a>),
+    Reveal(&'a TriviaQuestion<'a>),
 }
