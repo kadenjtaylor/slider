@@ -14,6 +14,14 @@ pub fn Slideshow() -> Html {
             major: "Still a Slideshow",
             minor: Some("still by Kaden Taylor"),
         },
+        Slide::Title {
+            major: "A VERY BORING SLIDESHOW",
+            minor: None,
+        },
+        Slide::Title {
+            major: "The END",
+            minor: None,
+        },
     ];
     let counter = use_state(|| 0);
 
@@ -31,8 +39,14 @@ pub fn Slideshow() -> Html {
         }
     };
 
+    let onkeypress = {
+        move |event: KeyboardEvent| {
+            log::debug!("{:?}", event);
+        }
+    };
+
     html! {
-        <main {onclick}>
+        <main {onclick} onkeypress={onkeypress}>
             { RenderableAsHtml::render(slides.get(*counter).unwrap()) }
         </main>
     }
