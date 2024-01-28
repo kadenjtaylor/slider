@@ -34,15 +34,15 @@ pub fn Slideshow() -> Html {
             minor: None,
         },
     ];
-    let counter = use_state(|| 0);
+    let counter: UseStateHandle<usize> = use_state(|| 0);
+    let num_slides = slides.len();
 
     let onclick = {
         let counter = counter.clone();
-        let max = slides.len();
         log::debug!("Clicked: {:?}", counter);
         move |_| {
             let value = *counter + 1;
-            if value < max {
+            if value < num_slides {
                 counter.set(value);
             } else {
                 log::debug!("Refusing to increment past maximum.");
