@@ -23,10 +23,10 @@ impl RenderableAsHtml for Slide<'_> {
             }
             Slide::Question(TriviaQuestion::FillInBlank {
                 before,
-                blank,
+                blank: _,
                 after,
             }) => {
-                let spaces: String = iter::repeat("_").take(blank.len()).collect();
+                let spaces: String = iter::repeat("_").take(11).collect();
                 html! {
                     <slide>
                         <h2>{ before }</h2>
