@@ -1,3 +1,4 @@
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum TriviaQuestion<'a> {
     QAndA {
         question: &'a str,
@@ -10,11 +11,12 @@ pub enum TriviaQuestion<'a> {
     },
 }
 
+#[derive(Debug, PartialEq)]
 pub enum Slide<'a> {
     Title {
         major: &'a str,
         minor: Option<&'a str>,
     },
-    Question(&'a TriviaQuestion<'a>),
-    Reveal(&'a TriviaQuestion<'a>),
+    Question(TriviaQuestion<'a>),
+    Reveal(TriviaQuestion<'a>),
 }

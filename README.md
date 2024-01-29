@@ -3,7 +3,7 @@
 Yew app for slideshows built with [Trunk].
 
 ### TODOS
-1. Props in slideshow constructor, move data to main
+1. ~~Props in slideshow constructor, move data to main~~
 2. Keyboard events for navigation
 3. Serde for slideshows
 4. UI for upload of slideshow files
