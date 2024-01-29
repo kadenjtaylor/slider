@@ -9,11 +9,8 @@ mod model;
 mod rendering;
 
 fn main() {
-    // Init application logging
     wasm_logger::init(wasm_logger::Config::default());
-
     let cfg = props!(Config { slides: slides() });
-
     yew::Renderer::<Slideshow>::with_props(cfg).render();
 }
 

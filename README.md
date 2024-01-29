@@ -4,8 +4,9 @@ Yew app for slideshows built with [Trunk].
 
 ### TODOS
 1. ~~Props in slideshow constructor, move data to main~~
-2. Keyboard events for navigation
+2. ~~Keyboard events for navigation (Looks pretty traightforward actually: https://github.com/yewstack/yew/issues/372#issuecomment-1010349322)~~
 3. Serde for slideshows
+    (Perhaps: https://github.com/serde-rs/json)
 4. UI for upload of slideshow files
 
 ### Running
