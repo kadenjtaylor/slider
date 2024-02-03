@@ -8,7 +8,7 @@ pub trait RenderableAsHtml {
     fn render(s: &Self) -> Html;
 }
 
-impl RenderableAsHtml for Slide<'_> {
+impl RenderableAsHtml for Slide {
     fn render(s: &Self) -> Html {
         match s {
             Slide::Title { major, minor } => {
@@ -16,7 +16,7 @@ impl RenderableAsHtml for Slide<'_> {
                     <div>
                         <h1>{ major }</h1>
                             if minor.is_some() {
-                                <h2>{minor.unwrap()}</h2>
+                                <h2>{minor.clone().unwrap()}</h2>
                             }
                     </div>
                 }

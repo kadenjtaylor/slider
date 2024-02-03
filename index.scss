@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  background: linear-gradient(to bottom right, #444444, #00719a);
+  background: linear-gradient(to bottom right, #529b63, #00719a);
   font-size: 3rem;
 }
 
@@ -16,9 +16,8 @@ main {
   align-items: center;
   display: flex;
   justify-content: center;
-  color: #fff6d5;
-  font-family: sans-serif;
   text-align: center;
+  margin: 0;
 }
 
 slide {
@@ -27,5 +26,89 @@ slide {
 
 blank {
   text-decoration: underline;
-  color: rgb(20, 0, 18)
+  color: rgb(24, 43, 140);
+}
+
+//-------
+
+* {
+  box-sizing: border-box;
+  color: #fff6d5;
+  font-family: sans-serif;
+}
+
+p {
+  text-align: center;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  margin: 50px;
+}
+
+label {
+  cursor: pointer;
+}
+
+input#file-upload {
+  visibility: hidden;
+}
+
+a {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#wrapper {
+  width: 70%;
+  margin: auto;
+}
+
+#title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#drop-container {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #4e8f8f;
+  border: 1px dashed #fcfcfc;
+  border-radius: 1rem;
+}
+
+#error-container {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #9d1d2c;
+  border: 1px dashed #fcfcfc;
+  border-radius: 1rem;
+}
+
+#drop-container i {
+  font-size: 4rem;
+}
+
+.preview-tile {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 1rem;
+  background: #313737;
+  border-radius: 1rem;
+}
+
+.preview-media {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

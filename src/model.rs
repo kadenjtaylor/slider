@@ -1,24 +1,24 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq, Clone, Copy, Serialize, Deserialize)]
-pub enum TriviaQuestion<'a> {
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+pub enum TriviaQuestion {
     QAndA {
-        question: &'a str,
-        answer: &'a str,
+        question: String,
+        answer: String,
     },
     FillInBlank {
-        before: &'a str,
-        blank: &'a str,
-        after: &'a str,
+        before: String,
+        blank: String,
+        after: String,
     },
 }
 
-#[derive(Debug, PartialEq)]
-pub enum Slide<'a> {
+#[derive(Debug, PartialEq, Deserialize)]
+pub enum Slide {
     Title {
-        major: &'a str,
-        minor: Option<&'a str>,
+        major: String,
+        minor: Option<String>,
     },
-    Question(TriviaQuestion<'a>),
-    Reveal(TriviaQuestion<'a>),
+    Question(TriviaQuestion),
+    Reveal(TriviaQuestion),
 }
