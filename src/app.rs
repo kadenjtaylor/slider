@@ -7,7 +7,7 @@ use web_sys::{DragEvent, Event, FileList, HtmlInputElement};
 use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
-use crate::model::{to_slides, TriviaQuestion};
+use crate::model::{Round, TriviaGame, TriviaQuestion};
 use crate::slideshow::Slideshow;
 
 struct FileDetails {
@@ -70,64 +70,78 @@ impl Component for App {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         match &self.file {
-            None => {
-                html! {
-                    <main>
-                        <div id="wrapper">
-                            <h2>{ "Upload Your Questions File" }</h2>
-                            <label for="file-upload">
-                                <div
-                                    id="drop-container"
-                                    ondrop={ctx.link().callback(|event: DragEvent| {
-                                        event.prevent_default();
-                                        let files = event.data_transfer().unwrap().files();
-                                        Self::upload_files(files)
-                                    })}
-                                    ondragover={Callback::from(|event: DragEvent| {
-                                        event.prevent_default();
-                                    })}
-                                    ondragenter={Callback::from(|event: DragEvent| {
-                                        event.prevent_default();
-                                    })}
-                                >
-                                    <i class="fa fa-cloud-upload"></i>
-                                    <p>{"Drop your file here or click to select"}</p>
-                                </div>
-                            </label>
-                            <input
-                                id="file-upload"
-                                type="file"
-                                accept="text/*, .json"
-                                multiple={false}
-                                onchange={ctx.link().callback(move |e: Event| {
-                                    let input: HtmlInputElement = e.target_unchecked_into();
-                                    Self::upload_files(input.files())
-                                })}
-                            />
-                            <div>
-                                <a href={format!("data:text/json;charset=utf-8,{}", encode_uri_component(SAMPLE_JSON))} download={"questions.json"}>{"Download Sample Questions"}</a>
-                            </div>
-                        </div>
-                    </main>
-                }
-            }
-            Some(file) => {
-                html! {
-                    { Self::render_slideshow(file) }
-                }
-            }
+            None => Self::upload_page(ctx),
+            Some(file) => Self::render_slideshow(file),
         }
     }
 }
 
 impl App {
+    fn upload_page(ctx: &Context<Self>) -> Html {
+        html! {
+            <main>
+                <div id="wrapper">
+                    <h2>{ "Upload Your Questions File" }</h2>
+                    <label for="file-upload">
+                        <div
+                            id="drop-container"
+                            ondrop={ctx.link().callback(|event: DragEvent| {
+                                event.prevent_default();
+                                let files = event.data_transfer().unwrap().files();
+                                Self::upload_files(files)
+                            })}
+                            ondragover={Callback::from(|event: DragEvent| {
+                                event.prevent_default();
+                            })}
+                            ondragenter={Callback::from(|event: DragEvent| {
+                                event.prevent_default();
+                            })}
+                        >
+                            <i class="fa fa-cloud-upload"></i>
+                            <p>{"Drop your file here or click to select"}</p>
+                        </div>
+                    </label>
+                    <input
+                        id="file-upload"
+                        type="file"
+                        accept="text/*, .json"
+                        multiple={false}
+                        onchange={ctx.link().callback(move |e: Event| {
+                            let input: HtmlInputElement = e.target_unchecked_into();
+                            Self::upload_files(input.files())
+                        })}
+                    />
+                    { Self::demo_download() }
+                </div>
+            </main>
+        }
+    }
+
+    fn demo_download() -> Html {
+        let demo_game = TriviaGame {
+            rounds: vec![Round {
+                questions: vec![TriviaQuestion::FillInBlank {
+                    before: "Example".to_string(),
+                    blank: "thing".to_string(),
+                    after: "stuff".to_string(),
+                }],
+            }],
+        };
+        let demo_json = serde_json::to_string_pretty(&demo_game).unwrap();
+        html! {
+            <div>
+                <a href={format!("data:text/json;charset=utf-8,{}", encode_uri_component(&demo_json))} download={"questions.json"}>{"Download Sample Questions"}</a>
+            </div>
+        }
+    }
+
     fn render_slideshow(file: &FileDetails) -> Html {
         let my_data = file.data.clone();
         let file_str = String::from_utf8(my_data).unwrap();
-        match serde_json::from_str::<Vec<TriviaQuestion>>(&file_str) {
-            Ok(questions) => {
+        match serde_json::from_str::<TriviaGame>(&file_str) {
+            Ok(game) => {
                 html! {
-                    <Slideshow slides={ to_slides(questions) }></Slideshow>
+                    <Slideshow rounds={ game.rounds }></Slideshow>
                 }
             }
             Err(msg) => html! {
@@ -161,32 +175,32 @@ impl App {
     }
 }
 
-pub const SAMPLE_JSON: &str = r#"[
-    {
-      "FillInBlank": {
-        "before": "This is a",
-        "blank": " demo ",
-        "after": "program for creating slideshows!"
-      }
-    },
-    {
-      "FillInBlank": {
-        "before": "It uses",
-        "blank": " Yew for Rust+WASM ",
-        "after": "which means it runs in the browser!"
-      }
-    },
-    {
-      "QAndA": {
-        "question": "Why would I need something like this?",
-        "answer": "I regularly put together trivia shows, and this seems easier that futzing with Google Slides all the time"
-      }
-    },
-    {
-      "FillInBlank": {
-        "before": "It came from the template",
-        "blank": " https://github.com/yewstack/yew-trunk-minimal-template ",
-        "after": "which means I didn't have to think about it as hard"
-      }
-    }
-  ]"#;
+// pub const SAMPLE_JSON: &str = r#"[
+//     {
+//       "FillInBlank": {
+//         "before": "This is a",
+//         "blank": " demo ",
+//         "after": "program for creating slideshows!"
+//       }
+//     },
+//     {
+//       "FillInBlank": {
+//         "before": "It uses",
+//         "blank": " Yew for Rust+WASM ",
+//         "after": "which means it runs in the browser!"
+//       }
+//     },
+//     {
+//       "QAndA": {
+//         "question": "Why would I need something like this?",
+//         "answer": "I regularly put together trivia shows, and this seems easier that futzing with Google Slides all the time"
+//       }
+//     },
+//     {
+//       "FillInBlank": {
+//         "before": "It came from the template",
+//         "blank": " https://github.com/yewstack/yew-trunk-minimal-template ",
+//         "after": "which means I didn't have to think about it as hard"
+//       }
+//     }
+//   ]"#;

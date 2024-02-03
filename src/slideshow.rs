@@ -2,12 +2,13 @@ use gloo::events::EventListener;
 
 use yew::prelude::*;
 
-use crate::{model::Config, rendering::RenderableAsHtml};
+use crate::{model::{to_slides, TriviaGame}, rendering::RenderableAsHtml};
 use wasm_bindgen::JsCast;
 
 #[function_component]
-pub fn Slideshow(cfg: &Config) -> Html {
-    let num_slides = cfg.slides.len();
+pub fn Slideshow(game: &TriviaGame) -> Html {
+    let slides = to_slides(game);
+    let num_slides = slides.len();
     let counter: UseStateHandle<usize> = use_state(|| 0);
 
     let onclick = {
@@ -26,9 +27,7 @@ pub fn Slideshow(cfg: &Config) -> Html {
         let clone_counter = counter.clone();
         move |event: &Event| {
             let event: &KeyboardEvent = event.dyn_ref::<KeyboardEvent>().unwrap();
-            let key = event.key();
-
-            match key.as_str() {
+            match event.key().as_str() {
                 " " | "ArrowRight" => {
                     let value = *clone_counter + 1;
                     if value < num_slides {
@@ -44,7 +43,7 @@ pub fn Slideshow(cfg: &Config) -> Html {
                         log::debug!("Refusing to increment past minimum.");
                     }
                 }
-                _ => log::debug!("Ignoring keypress: {}", key),
+                key => log::debug!("Ignoring keypress: {}", key),
             }
         }
     };
@@ -60,7 +59,7 @@ pub fn Slideshow(cfg: &Config) -> Html {
 
     html! {
         <main {onclick}>
-            { RenderableAsHtml::render(cfg.slides.get(*counter).unwrap()) }
+            { RenderableAsHtml::render(slides.get(*counter).unwrap()) }
         </main>
     }
 }
