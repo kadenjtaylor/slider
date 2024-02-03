@@ -7,8 +7,8 @@ use web_sys::{DragEvent, Event, FileList, HtmlInputElement};
 use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
+use crate::components::slideshow::Slideshow;
 use crate::model::{Round, TriviaGame, TriviaQuestion};
-use crate::slideshow::Slideshow;
 
 struct FileDetails {
     name: String,

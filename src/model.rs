@@ -1,11 +1,6 @@
 use serde::{Deserialize, Serialize};
 use yew::Properties;
 
-// #[derive(Debug, PartialEq, Properties)]
-// pub struct Config {
-//     pub slides: Vec<Slide>,
-// }
-
 #[derive(Deserialize, Serialize, PartialEq, Properties)]
 pub struct TriviaGame {
     // TODO: Rules, prizes, metadata, etc.
