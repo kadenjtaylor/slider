@@ -1,5 +1,4 @@
 mod app;
-mod config;
 mod model;
 mod rendering;
 mod slideshow;

@@ -2,8 +2,7 @@ use gloo::events::EventListener;
 
 use yew::prelude::*;
 
-use crate::config::Config;
-use crate::rendering::RenderableAsHtml;
+use crate::{model::Config, rendering::RenderableAsHtml};
 use wasm_bindgen::JsCast;
 
 #[function_component]

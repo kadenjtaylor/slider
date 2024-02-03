@@ -7,8 +7,7 @@ use web_sys::{DragEvent, Event, FileList, HtmlInputElement};
 use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
-use crate::config::{to_slides, SAMPLE_JSON};
-use crate::model::TriviaQuestion;
+use crate::model::{to_slides, TriviaQuestion};
 use crate::slideshow::Slideshow;
 
 struct FileDetails {
@@ -161,3 +160,33 @@ impl App {
         Msg::Files(result)
     }
 }
+
+pub const SAMPLE_JSON: &str = r#"[
+    {
+      "FillInBlank": {
+        "before": "This is a",
+        "blank": " demo ",
+        "after": "program for creating slideshows!"
+      }
+    },
+    {
+      "FillInBlank": {
+        "before": "It uses",
+        "blank": " Yew for Rust+WASM ",
+        "after": "which means it runs in the browser!"
+      }
+    },
+    {
+      "QAndA": {
+        "question": "Why would I need something like this?",
+        "answer": "I regularly put together trivia shows, and this seems easier that futzing with Google Slides all the time"
+      }
+    },
+    {
+      "FillInBlank": {
+        "before": "It came from the template",
+        "blank": " https://github.com/yewstack/yew-trunk-minimal-template ",
+        "after": "which means I didn't have to think about it as hard"
+      }
+    }
+  ]"#;
