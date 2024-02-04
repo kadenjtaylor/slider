@@ -7,7 +7,7 @@ body {
 
 body {
   background: linear-gradient(to bottom right, #529b63, #00719a);
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 main {
@@ -22,7 +22,6 @@ main {
 
 slide {
   width: 75%;
-  margin: 500px;
 }
 
 blank {
@@ -38,19 +37,17 @@ bullets {
 
 * {
   box-sizing: border-box;
-  color: #fff6d5;
+  color: whitesmoke;
   font-family: sans-serif;
   overflow-wrap: anywhere;
 }
 
 p {
   text-align: center;
-  color: white;
 }
 
 h2 {
   text-align: center;
-  color: white;
   margin: 50px;
 }
 
@@ -62,19 +59,9 @@ input#file-upload {
   visibility: hidden;
 }
 
-a {
-  font-size: 2rem;
-  text-align: center;
-}
-
 #wrapper {
   width: 70%;
   margin: auto;
-}
-
-#title {
-  font-size: 2rem;
-  text-align: center;
 }
 
 #drop-container {
@@ -84,7 +71,7 @@ a {
   justify-content: center;
   align-items: center;
   background: #4e8f8f;
-  border: 1px dashed #fcfcfc;
+  border: 2px dashed #fcfcfc;
   border-radius: 1rem;
 }
 
@@ -97,24 +84,4 @@ a {
   background: #9d1d2c;
   border: 1px dashed #fcfcfc;
   border-radius: 1rem;
-}
-
-#drop-container i {
-  font-size: 4rem;
-}
-
-.preview-tile {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  margin: 1rem;
-  background: #313737;
-  border-radius: 1rem;
-}
-
-.preview-media {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
