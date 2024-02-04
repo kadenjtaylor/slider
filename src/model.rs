@@ -3,12 +3,20 @@ use yew::Properties;
 
 #[derive(Deserialize, Serialize, PartialEq, Properties)]
 pub struct TriviaGame {
-    // TODO: Rules, prizes, metadata, etc.
     pub rounds: Vec<Round>,
+    pub metadata: Metadata,
+}
+
+#[derive(Deserialize, Serialize, PartialEq, Properties)]
+pub struct Metadata {
+    pub rules: Vec<String>,
+    pub prizes: Vec<String>,
 }
 
 #[derive(Deserialize, Serialize, PartialEq, Properties)]
 pub struct Round {
+    pub title: String,
+    pub rules: Vec<String>,
     pub questions: Vec<TriviaQuestion>,
 }
 
@@ -30,6 +38,10 @@ pub enum Slide {
     Title {
         major: String,
         minor: Option<String>,
+    },
+    Information {
+        title: String,
+        bullets: Vec<String>,
     },
     Question(TriviaQuestion),
     Reveal(TriviaQuestion),

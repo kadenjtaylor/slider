@@ -66,6 +66,22 @@ impl RenderableAsHtml for Slide {
                     </slide>
                 }
             }
+            Slide::Information { title, bullets } => {
+                html! {
+                    <slide>
+                        <bullets>
+                            <h1>{ title }</h1>
+                                <ul>
+                                    { for bullets.iter().map(render_item) }
+                                </ul>
+                        </bullets>
+                    </slide>
+                }
+            }
         }
     }
+}
+
+fn render_item(s: &String) -> Html {
+    html!(<li>{ s }</li>)
 }

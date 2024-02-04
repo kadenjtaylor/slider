@@ -68,10 +68,20 @@ pub fn Slideshow(game: &TriviaGame) -> Html {
 }
 
 fn to_slides(game: &TriviaGame) -> Vec<Slide> {
-    let mut slides = vec![Slide::Title {
-        major: "Slideshow Program".to_string(),
-        minor: Some("by Kaden Taylor".to_string()),
-    }];
+    let mut slides = vec![
+        Slide::Title {
+            major: "Slideshow Program".to_string(),
+            minor: Some("by Kaden Taylor".to_string()),
+        },
+        Slide::Information {
+            title: "Rules".to_string(),
+            bullets: vec![
+                "No talking".to_string(),
+                "No laughing".to_string(),
+                "Have fun!".to_string(),
+            ],
+        },
+    ];
     for q in game.rounds.iter().map(|r| r.questions.iter()).flatten() {
         slides.push(Slide::Question(q.clone()));
         slides.push(Slide::Reveal(q.clone()));

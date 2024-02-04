@@ -8,7 +8,7 @@ use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
 use crate::components::slideshow::Slideshow;
-use crate::model::{Round, TriviaGame, TriviaQuestion};
+use crate::model::{Metadata, Round, TriviaGame, TriviaQuestion};
 
 struct FileDetails {
     name: String,
@@ -120,12 +120,18 @@ impl App {
     fn demo_download() -> Html {
         let demo_game = TriviaGame {
             rounds: vec![Round {
+                title: "Test Round".to_string(),
+                rules: vec!["You can only submit answers in spanish".to_string()],
                 questions: vec![TriviaQuestion::FillInBlank {
                     before: "Example".to_string(),
                     blank: "thing".to_string(),
                     after: "stuff".to_string(),
                 }],
             }],
+            metadata: Metadata {
+                rules: vec!["6 people per team maximum".to_string()],
+                prizes: vec!["winner take all".to_string()],
+            },
         };
         let demo_json = serde_json::to_string_pretty(&demo_game).unwrap();
         html! {
@@ -141,7 +147,7 @@ impl App {
         match serde_json::from_str::<TriviaGame>(&file_str) {
             Ok(game) => {
                 html! {
-                    <Slideshow rounds={ game.rounds }></Slideshow>
+                    <Slideshow rounds={ game.rounds } metadata = {game.metadata}></Slideshow>
                 }
             }
             Err(msg) => html! {

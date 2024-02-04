@@ -7,7 +7,7 @@ body {
 
 body {
   background: linear-gradient(to bottom right, #529b63, #00719a);
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 main {
@@ -21,12 +21,17 @@ main {
 }
 
 slide {
-  width: 75%,
+  width: 75%;
+  margin: 500px;
 }
 
 blank {
   text-decoration: underline;
   color: rgb(24, 43, 140);
+}
+
+bullets {
+  text-align: left;
 }
 
 //-------
