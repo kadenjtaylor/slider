@@ -66,7 +66,7 @@ impl RenderableAsHtml for Slide {
                     </slide>
                 }
             }
-            Slide::Information { title, bullets } => {
+            Slide::Bullets { title, bullets } => {
                 html! {
                     <slide>
                         <bullets>

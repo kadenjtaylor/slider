@@ -39,7 +39,7 @@ pub enum Slide {
         major: String,
         minor: Option<String>,
     },
-    Information {
+    Bullets {
         title: String,
         bullets: Vec<String>,
     },

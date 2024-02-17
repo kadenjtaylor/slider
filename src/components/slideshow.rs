@@ -73,7 +73,7 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             major: "Slideshow Program".to_string(),
             minor: Some("by Kaden Taylor".to_string()),
         },
-        Slide::Information {
+        Slide::Bullets {
             title: "Rules".to_string(),
             bullets: vec![
                 "No talking".to_string(),
