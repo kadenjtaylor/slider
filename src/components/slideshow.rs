@@ -3,7 +3,7 @@ use gloo::events::EventListener;
 use yew::prelude::*;
 
 use crate::{
-    model::{Slide, TriviaGame},
+    model::{RoundContent, Slide, TriviaGame},
     rendering::RenderableAsHtml,
 };
 use wasm_bindgen::JsCast;
@@ -82,9 +82,27 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             ],
         },
     ];
-    for q in game.rounds.iter().map(|r| r.questions.iter()).flatten() {
-        slides.push(Slide::Question(q.clone()));
-        slides.push(Slide::Reveal(q.clone()));
+    for r in game.rounds.iter() {
+        slides.push(Slide::Title {
+            major: r.title.to_string(),
+            minor: None,
+        });
+        slides.push(Slide::Bullets {
+            title: "Rules".to_string(),
+            bullets: r.rules.iter().map(|s| s.to_string()).collect(),
+        });
+        match &r.content {
+            RoundContent::Questions(qs) => {
+                for q in qs {
+                    slides.push(Slide::Question(q.clone()));
+                    slides.push(Slide::Reveal(q.clone()));
+                }
+            }
+            RoundContent::Pictures(pics) => slides.push(Slide::Title {
+                major: "This should be a picture grid".to_string(),
+                minor: Some(format!("{:?} pictures, to be exact", pics)),
+            }),
+        }
     }
     slides.push(Slide::Title {
         major: "I hope you've enjoyed".to_string(),

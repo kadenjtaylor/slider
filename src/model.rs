@@ -17,7 +17,26 @@ pub struct Metadata {
 pub struct Round {
     pub title: String,
     pub rules: Vec<String>,
-    pub questions: Vec<TriviaQuestion>,
+    pub content: RoundContent,
+}
+
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
+pub enum RoundContent {
+    Questions(Vec<TriviaQuestion>),
+    Pictures(PictureGrid),
+}
+
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+pub struct IdentifyPicture {
+    pub answer: String,
+    pub source: String,
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+pub enum PictureGrid {
+    FourByFour { pics: [IdentifyPicture; 16] },
+    ThreeByFive { pics: [IdentifyPicture; 15] },
+    ThreeByFour { pics: [IdentifyPicture; 12] },
 }
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]

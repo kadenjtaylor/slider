@@ -8,7 +8,7 @@ use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
 use crate::components::slideshow::Slideshow;
-use crate::model::{Metadata, Round, TriviaGame, TriviaQuestion};
+use crate::model::{IdentifyPicture, Metadata, Round, RoundContent, TriviaGame, TriviaQuestion};
 
 struct FileDetails {
     name: String,
@@ -118,15 +118,18 @@ impl App {
     }
 
     fn demo_download() -> Html {
+        let kaden_face = include_str!("../resources/kaden_face.txt");
         let demo_game = TriviaGame {
             rounds: vec![Round {
                 title: "Test Round".to_string(),
                 rules: vec!["You can only submit answers in spanish".to_string()],
-                questions: vec![TriviaQuestion::FillInBlank {
-                    before: "Example".to_string(),
-                    blank: "thing".to_string(),
-                    after: "stuff".to_string(),
-                }],
+                content: RoundContent::Questions(vec![
+                    TriviaQuestion::FillInBlank {
+                        before: "Example".to_string(),
+                        blank: "thing".to_string(),
+                        after: "stuff".to_string(),
+                    },
+                ])
             }],
             metadata: Metadata {
                 rules: vec!["6 people per team maximum".to_string()],
