@@ -120,18 +120,42 @@ impl App {
     fn demo_download() -> Html {
         let kaden_face = include_str!("../resources/kaden_face.txt");
         let demo_game = TriviaGame {
-            rounds: vec![Round {
-                title: "Test Round".to_string(),
-                rules: vec!["You can only submit answers in spanish".to_string()],
-                content: RoundContent::Questions(vec![
-                    TriviaQuestion::FillInBlank {
-                        before: "Example".to_string(),
-                        blank: "thing".to_string(),
-                        after: "stuff".to_string(),
-                    },
-                ])
-            }],
+            rounds: vec![
+                Round {
+                    title: "Current Events".to_string(),
+                    rules: vec!["These are all thing that happened in the last week".to_string()],
+                    content: RoundContent::Questions(vec![
+                        TriviaQuestion::FillInBlank {
+                            before: "Fill in the".to_string(),
+                            blank: "blank".to_string(),
+                            after: ".".to_string(),
+                        },
+                        TriviaQuestion::FillInBlank {
+                            before: "That's my".to_string(),
+                            blank: "secret".to_string(),
+                            after: "Cap, I'm always angry.".to_string(),
+                        },
+                    ]),
+                },
+                Round {
+                    title: "Guess That Face".to_string(),
+                    rules: vec!["You will have 10 minutes".to_string()],
+                    content: RoundContent::Pictures(crate::model::PictureGrid::ThreeByFive {
+                        pics: [
+                            kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
+                            kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
+                            kaden_face, kaden_face, kaden_face
+                        ]
+                        .map(|img| IdentifyPicture {
+                            answer: "Kaden's Face".to_string(),
+                            source: img.to_string(),
+                        }),
+                    }),
+                },
+            ],
             metadata: Metadata {
+                title: "Burger Planet Tivia".to_string(),
+                presenter: Some("Kaden Taylor".to_string()),
                 rules: vec!["6 people per team maximum".to_string()],
                 prizes: vec!["winner take all".to_string()],
             },

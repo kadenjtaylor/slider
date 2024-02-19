@@ -9,6 +9,8 @@ pub struct TriviaGame {
 
 #[derive(Deserialize, Serialize, PartialEq, Properties)]
 pub struct Metadata {
+    pub title: String,
+    pub presenter: Option<String>,
     pub rules: Vec<String>,
     pub prizes: Vec<String>,
 }
@@ -32,7 +34,7 @@ pub struct IdentifyPicture {
     pub source: String,
 }
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Serialize, Deserialize, Clone)]
 pub enum PictureGrid {
     FourByFour { pics: [IdentifyPicture; 16] },
     ThreeByFive { pics: [IdentifyPicture; 15] },
@@ -64,4 +66,6 @@ pub enum Slide {
     },
     Question(TriviaQuestion),
     Reveal(TriviaQuestion),
+    PictureQuestion(PictureGrid),
+    PictureReveal(PictureGrid),
 }

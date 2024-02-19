@@ -70,16 +70,16 @@ pub fn Slideshow(game: &TriviaGame) -> Html {
 fn to_slides(game: &TriviaGame) -> Vec<Slide> {
     let mut slides = vec![
         Slide::Title {
-            major: "Slideshow Program".to_string(),
-            minor: Some("by Kaden Taylor".to_string()),
+            major: game.metadata.title.to_string(),
+            minor: game
+                .metadata
+                .presenter
+                .clone()
+                .map(|name| format!("Presented by {}", name)),
         },
         Slide::Bullets {
             title: "Rules".to_string(),
-            bullets: vec![
-                "No talking".to_string(),
-                "No laughing".to_string(),
-                "Have fun!".to_string(),
-            ],
+            bullets: game.metadata.rules.clone(),
         },
     ];
     for r in game.rounds.iter() {
@@ -91,18 +91,26 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             title: "Rules".to_string(),
             bullets: r.rules.iter().map(|s| s.to_string()).collect(),
         });
+        let mut questions: Vec<Slide> = vec![];
+        let mut answers: Vec<Slide> = vec![];
         match &r.content {
             RoundContent::Questions(qs) => {
                 for q in qs {
-                    slides.push(Slide::Question(q.clone()));
-                    slides.push(Slide::Reveal(q.clone()));
+                    questions.push(Slide::Question(q.clone()));
+                    answers.push(Slide::Reveal(q.clone()));
                 }
             }
-            RoundContent::Pictures(pics) => slides.push(Slide::Title {
-                major: "This should be a picture grid".to_string(),
-                minor: Some(format!("{:?} pictures, to be exact", pics)),
-            }),
+            RoundContent::Pictures(pics) => {
+                questions.push(Slide::PictureQuestion(pics.clone()));
+                answers.push(Slide::PictureReveal(pics.clone()));
+            }
         }
+        slides.extend(questions);
+        slides.push(Slide::Title {
+            major: "Grading Time".to_string(),
+            minor: None,
+        });
+        slides.extend(answers);
     }
     slides.push(Slide::Title {
         major: "I hope you've enjoyed".to_string(),
