@@ -95,9 +95,9 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
         let mut answers: Vec<Slide> = vec![];
         match &r.content {
             RoundContent::Questions(qs) => {
-                for q in qs {
-                    questions.push(Slide::Question(q.clone()));
-                    answers.push(Slide::Reveal(q.clone()));
+                for (i, q) in qs.iter().enumerate() {
+                    questions.push(Slide::Question(i + 1, q.clone()));
+                    answers.push(Slide::Reveal(i + 1, q.clone()));
                 }
             }
             RoundContent::Pictures(pics) => {

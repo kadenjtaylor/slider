@@ -144,7 +144,7 @@ impl App {
                         pics: [
                             kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
                             kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
-                            kaden_face, kaden_face, kaden_face
+                            kaden_face, kaden_face, kaden_face,
                         ]
                         .map(|img| IdentifyPicture {
                             answer: "Kaden's Face".to_string(),

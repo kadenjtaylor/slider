@@ -64,8 +64,8 @@ pub enum Slide {
         title: String,
         bullets: Vec<String>,
     },
-    Question(TriviaQuestion),
-    Reveal(TriviaQuestion),
+    Question(usize, TriviaQuestion),
+    Reveal(usize, TriviaQuestion),
     PictureQuestion(PictureGrid),
     PictureReveal(PictureGrid),
 }

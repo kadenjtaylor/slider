@@ -22,46 +22,59 @@ impl RenderableAsHtml for Slide {
                     </div>
                 }
             }
-            Slide::Question(TriviaQuestion::FillInBlank {
-                before,
-                blank: _,
-                after,
-            }) => {
+            Slide::Question(
+                num,
+                TriviaQuestion::FillInBlank {
+                    before,
+                    blank: _,
+                    after,
+                },
+            ) => {
                 let spaces: String = iter::repeat("_").take(11).collect();
                 html! {
                     <slide>
+                        <p>{num}</p>
                         <h2>{ before }</h2>
                         <h2><blank>{ spaces }</blank></h2>
                         <h2>{ after }</h2>
                     </slide>
                 }
             }
-            Slide::Reveal(TriviaQuestion::FillInBlank {
-                before,
-                blank,
-                after,
-            }) => {
+            Slide::Reveal(
+                num,
+                TriviaQuestion::FillInBlank {
+                    before,
+                    blank,
+                    after,
+                },
+            ) => {
                 html! {
                     <slide>
+                        <p>{num}</p>
                         <h2>{ before }</h2>
                         <h2><blank>{ blank }</blank></h2>
                         <h2>{ after }</h2>
                     </slide>
                 }
             }
-            Slide::Question(TriviaQuestion::QAndA {
-                question,
-                answer: _,
-            }) => {
+            Slide::Question(
+                num,
+                TriviaQuestion::QAndA {
+                    question,
+                    answer: _,
+                },
+            ) => {
                 html! {
                     <slide>
+                        <p>{num}</p>
                         <h2>{ question }</h2>
                     </slide>
                 }
             }
-            Slide::Reveal(TriviaQuestion::QAndA { question, answer }) => {
+            Slide::Reveal(num, TriviaQuestion::QAndA { question, answer }) => {
                 html! {
                     <slide>
+                        <p>{num}</p>
                         <h2>{ question }</h2>
                         <h2>{ answer }</h2>
                     </slide>
@@ -100,8 +113,13 @@ fn render_picture_grid(pics: &PictureGrid, reveal: bool) -> Html {
     html! {
         <div class={"grid"} style={ format!("--columns:{}", columns) }>
             { for pics.iter().enumerate().map(|(i, ip)| html!{
-                // <span>{format!("{}", i)}</span>
-                <img src={ip.source.to_string()}/>
+                <image_container>
+                    <img src={ip.source.to_string()}/>
+                    <question_number>{format!("{}", i+1)}</question_number>
+                    if reveal {
+                        <overlay_text>{format!("{}", ip.answer)}</overlay_text>
+                    }
+                </image_container>
             }) }
         </div>
     }
