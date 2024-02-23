@@ -32,6 +32,10 @@ centered_slide {
   justify-content: center;
 }
 
+question_number {
+  font-size: 100px;
+}
+
 // Image grid styling
 
 .grid {
@@ -57,7 +61,7 @@ image_container {
   display: inline-block;
 }
 
-question_number {
+image_number {
   position: absolute;
   top: 5%;
   left: 5%;

@@ -135,6 +135,11 @@ impl App {
                             blank: "secret".to_string(),
                             after: "Cap, I'm always angry.".to_string(),
                         },
+                        TriviaQuestion::QAndA {
+                            question: "What is the airspeed velocity of an unladen swallow?"
+                                .to_string(),
+                            answer: "What kind? African or European?".to_string(),
+                        },
                     ]),
                 },
                 Round {

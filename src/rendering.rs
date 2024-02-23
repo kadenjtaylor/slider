@@ -36,6 +36,7 @@ impl RenderableAsHtml for Slide {
                 html! {
                     <centered_slide>
                         <h2>
+                        <question_number>{format!("{})  ", num)}</question_number>
                             { format!("{} ", before) }<blank>{ spaces }</blank>{ format!(" {}", after) }
                         </h2>
                     </centered_slide>
@@ -51,8 +52,8 @@ impl RenderableAsHtml for Slide {
             ) => {
                 html! {
                     <centered_slide>
-                        <p>{num}</p>
                         <h2>
+                        <question_number>{format!("{})  ", num)}</question_number>
                             { format!("{} ", before) }<blank>{ blank }</blank>{ format!(" {}", after) }
                         </h2>
                     </centered_slide>
@@ -67,17 +68,23 @@ impl RenderableAsHtml for Slide {
             ) => {
                 html! {
                     <centered_slide>
-                        <p>{num}</p>
-                        <h2>{ question }</h2>
+                        <h2>
+                        <question_number>{format!("{})  ", num)}</question_number>
+                            { question }
+                        </h2>
                     </centered_slide>
                 }
             }
             Slide::Reveal(num, TriviaQuestion::QAndA { question, answer }) => {
                 html! {
                     <centered_slide>
-                        <p>{num}</p>
-                        <h2>{ question }</h2>
+                        <div>
+                        <h2>
+                        <question_number>{format!("{})  ", num)}</question_number>
+                            { question }
+                        </h2>
                         <h2>{ answer }</h2>
+                        </div>
                     </centered_slide>
                 }
             }
@@ -137,7 +144,7 @@ fn render_picture_grid(pics: &PictureGrid, reveal: bool) -> Html {
             { for pics.iter().enumerate().map(|(i, ip)| html!{
                 <image_container>
                     <img src={ip.source.to_string()}/>
-                    <question_number>{format!("{}", i+1)}</question_number>
+                    <image_number>{format!("{}", i+1)}</image_number>
                     if reveal {
                         <overlay_text>{format!("{}", ip.answer)}</overlay_text>
                     }
