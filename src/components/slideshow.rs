@@ -69,13 +69,10 @@ pub fn Slideshow(game: &TriviaGame) -> Html {
 
 fn to_slides(game: &TriviaGame) -> Vec<Slide> {
     let mut slides = vec![
-        Slide::Title {
-            major: game.metadata.title.to_string(),
-            minor: game
-                .metadata
-                .presenter
-                .clone()
-                .map(|name| format!("Presented by {}", name)),
+        Slide::Preview {
+            title: "Trivia Night".to_string(),
+            image_source: "https://static.wixstatic.com/media/98856d_de50ee2058794582b33bf50a532f3282~mv2_d_1800_1800_s_2.png/v1/fill/w_400,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/98856d_de50ee2058794582b33bf50a532f3282~mv2_d_1800_1800_s_2.png".to_string(),
+            categories: game.rounds.iter().map(|r| r.title.to_string()).collect()
         },
         Slide::Bullets {
             title: "Rules".to_string(),

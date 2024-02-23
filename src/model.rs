@@ -56,6 +56,11 @@ pub enum TriviaQuestion {
 
 #[derive(Debug, PartialEq, Deserialize)]
 pub enum Slide {
+    Preview {
+        title: String,
+        image_source: String,
+        categories: Vec<String>,
+    },
     Title {
         major: String,
         minor: Option<String>,

@@ -3,10 +3,7 @@
 Yew app for slideshows built with [Trunk].
 
 ### TODOS
-- Better question model
-- Better slide model
-- Better algo for turning questions into slides
-- Nicer rendering of slides
+- Better Formatting of Slides
 
 ### Running
 

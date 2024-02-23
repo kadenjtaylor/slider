@@ -13,7 +13,6 @@ body {
 main {
   height: 100%;
   width: 100%;
-  align-items: center;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -22,9 +21,12 @@ main {
 
 slide {
   width: 75%;
+  margin-top: 5%;
+  align-items: center;
 }
 
 // Image grid styling
+
 .grid {
   display: grid;
   gap: 10px;
@@ -40,6 +42,7 @@ slide {
   min-height: 100%;
   min-width: 100%;
   object-fit: cover;
+  border-radius: 5%;
 }
 
 image_container {

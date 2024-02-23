@@ -14,12 +14,12 @@ impl RenderableAsHtml for Slide {
         match s {
             Slide::Title { major, minor } => {
                 html! {
-                    <div>
+                    <slide>
                         <h1>{ major }</h1>
                             if minor.is_some() {
                                 <h2>{minor.clone().unwrap()}</h2>
                             }
-                    </div>
+                    </slide>
                 }
             }
             Slide::Question(
@@ -94,6 +94,27 @@ impl RenderableAsHtml for Slide {
             }
             Slide::PictureQuestion(pics) => render_picture_grid(pics, false),
             Slide::PictureReveal(pics) => render_picture_grid(pics, true),
+            Slide::Preview {
+                title,
+                image_source,
+                categories,
+            } => {
+                html! {
+                    <slide>
+                        <h1>{title}</h1>
+                        <div style="width: 100%;">
+                            <div style="width: 50%; float: left;">
+                                <img src={image_source.to_string()} width="800px"/>
+                            </div>
+                            <div style="margin-left: 50%;">
+                                <ul>
+                                    { for categories.iter().map(render_item) }
+                                </ul>
+                            </div>
+                        </div>
+                    </slide>
+                }
+            }
         }
     }
 }
