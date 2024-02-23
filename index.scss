@@ -22,7 +22,14 @@ main {
 slide {
   width: 75%;
   margin-top: 5%;
+}
+
+centered_slide {
+  width: 75%;
+  display: flex;
   align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 // Image grid styling

@@ -14,12 +14,14 @@ impl RenderableAsHtml for Slide {
         match s {
             Slide::Title { major, minor } => {
                 html! {
-                    <slide>
-                        <h1>{ major }</h1>
-                            if minor.is_some() {
-                                <h2>{minor.clone().unwrap()}</h2>
-                            }
-                    </slide>
+                    <centered_slide>
+                        <div>
+                            <h1>{ major }</h1>
+                                if minor.is_some() {
+                                    <h2>{minor.clone().unwrap()}</h2>
+                                }
+                        </div>
+                    </centered_slide>
                 }
             }
             Slide::Question(
@@ -32,12 +34,11 @@ impl RenderableAsHtml for Slide {
             ) => {
                 let spaces: String = iter::repeat("_").take(11).collect();
                 html! {
-                    <slide>
-                        <p>{num}</p>
-                        <h2>{ before }</h2>
-                        <h2><blank>{ spaces }</blank></h2>
-                        <h2>{ after }</h2>
-                    </slide>
+                    <centered_slide>
+                        <h2>
+                            { format!("{} ", before) }<blank>{ spaces }</blank>{ format!(" {}", after) }
+                        </h2>
+                    </centered_slide>
                 }
             }
             Slide::Reveal(
@@ -49,12 +50,12 @@ impl RenderableAsHtml for Slide {
                 },
             ) => {
                 html! {
-                    <slide>
+                    <centered_slide>
                         <p>{num}</p>
-                        <h2>{ before }</h2>
-                        <h2><blank>{ blank }</blank></h2>
-                        <h2>{ after }</h2>
-                    </slide>
+                        <h2>
+                            { format!("{} ", before) }<blank>{ blank }</blank>{ format!(" {}", after) }
+                        </h2>
+                    </centered_slide>
                 }
             }
             Slide::Question(
@@ -65,19 +66,19 @@ impl RenderableAsHtml for Slide {
                 },
             ) => {
                 html! {
-                    <slide>
+                    <centered_slide>
                         <p>{num}</p>
                         <h2>{ question }</h2>
-                    </slide>
+                    </centered_slide>
                 }
             }
             Slide::Reveal(num, TriviaQuestion::QAndA { question, answer }) => {
                 html! {
-                    <slide>
+                    <centered_slide>
                         <p>{num}</p>
                         <h2>{ question }</h2>
                         <h2>{ answer }</h2>
-                    </slide>
+                    </centered_slide>
                 }
             }
             Slide::Bullets { title, bullets } => {
