@@ -83,7 +83,7 @@ impl RenderableAsHtml for Slide {
                         <question_number>{format!("{})  ", num)}</question_number>
                             { question }
                         </h2>
-                        <h2>{ answer }</h2>
+                        <h2><answer>{ answer }</answer></h2>
                         </div>
                     </centered_slide>
                 }
