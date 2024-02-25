@@ -84,10 +84,12 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             major: r.title.to_string(),
             minor: None,
         });
-        slides.push(Slide::Bullets {
-            title: "Rules".to_string(),
-            bullets: r.rules.iter().map(|s| s.to_string()).collect(),
-        });
+        if !r.rules.is_empty() {
+            slides.push(Slide::Bullets {
+                title: "Rules".to_string(),
+                bullets: r.rules.iter().map(|s| s.to_string()).collect(),
+            });
+        }
         let mut questions: Vec<Slide> = vec![];
         let mut answers: Vec<Slide> = vec![];
         match &r.content {

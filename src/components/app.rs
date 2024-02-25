@@ -143,6 +143,16 @@ impl App {
                     ]),
                 },
                 Round {
+                    title: "Name that Tune".to_string(),
+                    rules: vec![],
+                    content: RoundContent::Questions(vec![]),
+                },
+                Round {
+                    title: "Random".to_string(),
+                    rules: vec![],
+                    content: RoundContent::Questions(vec![]),
+                },
+                Round {
                     title: "Guess That Face".to_string(),
                     rules: vec!["You will have 10 minutes".to_string()],
                     content: RoundContent::Pictures(crate::model::PictureGrid::ThreeByFive {
@@ -156,6 +166,11 @@ impl App {
                             source: img.to_string(),
                         }),
                     }),
+                },
+                Round {
+                    title: "Theme Round".to_string(),
+                    rules: vec![],
+                    content: RoundContent::Questions(vec![]),
                 },
             ],
             metadata: Metadata {

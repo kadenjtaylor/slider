@@ -109,12 +109,12 @@ impl RenderableAsHtml for Slide {
             } => {
                 html! {
                     <slide>
-                        <h1>{title}</h1>
+                        <h1 style="font-size: 5vw">{title}</h1>
                         <div style="width: 100%;">
                             <div style="width: 50%; float: left;">
-                                <img src={image_source.to_string()} width="800px"/>
+                                <img src={image_source.to_string()} width="100%"/>
                             </div>
-                            <div style="margin-left: 50%;">
+                            <div style="margin-left: 50%;display: flex;padding-top: 5%;padding-left: 3%; text-align: left; font-size: 3.5vw">
                                 <ul>
                                     { for categories.iter().map(render_item) }
                                 </ul>
