@@ -2,9 +2,6 @@
 
 Yew app for slideshows built with [Trunk].
 
-### TODOS
-- Better Formatting of Slides
-
 ### Running
 
 ```bash

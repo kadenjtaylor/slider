@@ -14,14 +14,14 @@ impl RenderableAsHtml for Slide {
         match s {
             Slide::Title { major, minor } => {
                 html! {
-                    <centered_slide>
+                    <slide>
                         <div>
                             <h1>{ major }</h1>
                                 if minor.is_some() {
                                     <h2>{minor.clone().unwrap()}</h2>
                                 }
                         </div>
-                    </centered_slide>
+                    </slide>
                 }
             }
             Slide::Question(
@@ -34,12 +34,11 @@ impl RenderableAsHtml for Slide {
             ) => {
                 let spaces: String = iter::repeat("_").take(11).collect();
                 html! {
-                    <centered_slide>
+                    <slide>
                         <h2>
-                        <question_number>{format!("{})  ", num)}</question_number>
-                            { format!("{} ", before) }<blank>{ spaces }</blank>{ format!(" {}", after) }
+                            { format!("{}.  {} ", num, before) }<blank>{ spaces }</blank>{ format!(" {}", after) }
                         </h2>
-                    </centered_slide>
+                    </slide>
                 }
             }
             Slide::Reveal(
@@ -51,12 +50,11 @@ impl RenderableAsHtml for Slide {
                 },
             ) => {
                 html! {
-                    <centered_slide>
+                    <slide>
                         <h2>
-                        <question_number>{format!("{})  ", num)}</question_number>
-                            { format!("{} ", before) }<blank>{ blank }</blank>{ format!(" {}", after) }
+                            { format!("{}.  {} ", num, before) }<blank>{ blank }</blank>{ format!(" {}", after) }
                         </h2>
-                    </centered_slide>
+                    </slide>
                 }
             }
             Slide::Question(
@@ -67,25 +65,23 @@ impl RenderableAsHtml for Slide {
                 },
             ) => {
                 html! {
-                    <centered_slide>
+                    <slide>
                         <h2>
-                        <question_number>{format!("{})  ", num)}</question_number>
-                            { question }
+                        { format!("{}.  {}", num, question) }
                         </h2>
-                    </centered_slide>
+                    </slide>
                 }
             }
             Slide::Reveal(num, TriviaQuestion::QAndA { question, answer }) => {
                 html! {
-                    <centered_slide>
+                    <slide>
                         <div>
                         <h2>
-                        <question_number>{format!("{})  ", num)}</question_number>
-                            { question }
+                            { format!("{}.  {}", num, question) }
                         </h2>
                         <h2><answer>{ answer }</answer></h2>
                         </div>
-                    </centered_slide>
+                    </slide>
                 }
             }
             Slide::Bullets { title, bullets } => {
@@ -108,8 +104,8 @@ impl RenderableAsHtml for Slide {
                 categories,
             } => {
                 html! {
-                    <centered_slide>
-                        <div style="width:100%">
+                    <slide>
+                        <div style="width:100%; max-height:90%">
                             <h1 style="font-size: 7vw; margin:auto">{title}</h1>
                             <div style="display:flex; align-items: center">
                                 <div style="width: 50%; float: left;">
@@ -122,7 +118,7 @@ impl RenderableAsHtml for Slide {
                                 </div>
                             </div>
                         </div>
-                    </centered_slide>
+                    </slide>
                 }
             }
         }
@@ -133,7 +129,6 @@ fn render_item(s: &String) -> Html {
     html!(<li>{ s }</li>)
 }
 
-// TODO: Add indexes, answers (only if reveal == true)
 fn render_picture_grid(pics: &PictureGrid, reveal: bool) -> Html {
     let (columns, pics): (u32, Vec<IdentifyPicture>) = match pics {
         PictureGrid::FourByFour { pics } => (4, pics.to_vec()),

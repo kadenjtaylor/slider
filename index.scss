@@ -7,7 +7,7 @@ body {
 
 body {
   background: linear-gradient(to bottom right, #529b63, #00719a);
-  font-size: 3rem;
+  font-size: 4vw;
 }
 
 main {
@@ -20,20 +20,11 @@ main {
 }
 
 slide {
-  width: 75%;
-  margin-top: 2%;
-}
-
-centered_slide {
-  width: 75%;
+  width: 80%;
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
-}
-
-question_number {
-  font-size: 100px;
 }
 
 // Image grid styling
@@ -68,7 +59,7 @@ image_number {
   background-color: #000000;
   color: #fff;
   padding: 10px 20px;
-  font-size: 40px;
+  font-size: 2vw;
   text-align: center;
 }
 
@@ -79,7 +70,7 @@ overlay_text {
   background-color: #000000;
   color: #fff;
   padding: 10px 20px;
-  font-size: 40px;
+  font-size: 2vw;
   text-align: center;
 }
 

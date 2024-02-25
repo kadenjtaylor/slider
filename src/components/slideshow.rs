@@ -75,18 +75,18 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             categories: game.rounds.iter().map(|r| r.title.to_string()).collect()
         },
         Slide::Bullets {
-            title: "Rules".to_string(),
+            title: "Game Rules".to_string(),
             bullets: game.metadata.rules.clone(),
         },
     ];
-    for r in game.rounds.iter() {
+    for (i, r) in game.rounds.iter().enumerate() {
         slides.push(Slide::Title {
-            major: r.title.to_string(),
-            minor: None,
+            major: format!("Round {}:", i + 1),
+            minor: Some(format!("{}", r.title)),
         });
         if !r.rules.is_empty() {
             slides.push(Slide::Bullets {
-                title: "Rules".to_string(),
+                title: "Round Rules".to_string(),
                 bullets: r.rules.iter().map(|s| s.to_string()).collect(),
             });
         }
@@ -106,14 +106,14 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
         }
         slides.extend(questions);
         slides.push(Slide::Title {
-            major: "Grading Time".to_string(),
+            major: "Grading Time!".to_string(),
             minor: None,
         });
         slides.extend(answers);
     }
     slides.push(Slide::Title {
         major: "I hope you've enjoyed".to_string(),
-        minor: Some("my very minimalist slideshow".to_string()),
+        minor: Some("my slideshow".to_string()),
     });
     slides.push(Slide::Title {
         major: "The END".to_string(),

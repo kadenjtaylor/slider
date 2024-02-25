@@ -123,7 +123,7 @@ impl App {
             rounds: vec![
                 Round {
                     title: "Current Events".to_string(),
-                    rules: vec!["These are all thing that happened in the last week".to_string()],
+                    rules: vec!["These are all things that happened within the last week or so".to_string()],
                     content: RoundContent::Questions(vec![
                         TriviaQuestion::FillInBlank {
                             before: "Fill in the".to_string(),
