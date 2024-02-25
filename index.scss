@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  background: linear-gradient(to bottom right, #529b63, #00719a);
+  background: linear-gradient(to bottom right, #000000, #01435b);
   font-size: 4vw;
 }
 
@@ -78,11 +78,11 @@ overlay_text {
 
 blank {
   text-decoration: underline;
-  color: rgb(24, 43, 140);
+  color: rgb(0, 200, 60);
 }
 
 answer {
-  color: rgb(24, 43, 140);
+  color: rgb(0, 200, 60);
 }
 
 bullets {
@@ -94,7 +94,7 @@ bullets {
 * {
   box-sizing: border-box;
   color: whitesmoke;
-  font-family: sans-serif;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   overflow-wrap: anywhere;
 }
 
@@ -126,7 +126,7 @@ input#file-upload {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #4e8f8f;
+  background: #29405d;
   border: 2px dashed #fcfcfc;
   border-radius: 1rem;
 }
@@ -137,7 +137,7 @@ input#file-upload {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #9d1d2c;
+  background: #850b19;
   border: 1px dashed #fcfcfc;
   border-radius: 1rem;
 }
