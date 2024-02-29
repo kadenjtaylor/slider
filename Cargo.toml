@@ -5,7 +5,7 @@ edition = "2021"
 description = "Program for running simple slideshows from a file"
 readme = "README.md"
 repository = "https://github.com/yewstack/yew-trunk-minimal-template"
-license = "MIT OR Apache-2.0"
+license = "MIT"
 keywords = ["yew", "trunk"]
 categories = ["gui", "wasm", "web-programming"]
 

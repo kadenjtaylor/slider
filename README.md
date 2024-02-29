@@ -23,12 +23,4 @@ You can also pass the `--release` flag to `trunk serve` if you need to get every
 
 Unless overwritten, the output will be located in the `dist` directory.
 
-
-### License
-
-The template ships with both the Apache and MIT license.
-If you don't want to have your app dual licensed, just remove one (or both) of the files and update the `license` field in `Cargo.toml`.
-
-There are two empty spaces in the MIT license you need to fill out: `` and `Kaden Taylor <kadenjtaylor@gmail.com>`.
-
 [trunk]: https://github.com/thedodd/trunk
