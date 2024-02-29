@@ -120,8 +120,15 @@ impl App {
     }
 
     fn demo_download() -> Html {
-        let kaden_face = include_str!("../resources/kaden_face.txt");
+        let dummy_logo_url = "https://dynamic.brandcrowd.com/asset/logo/6d930c0b-9c8a-485a-b0e4-629a18c937b2/logo-search-grid-1x?logoTemplateVersion=2&v=638308718659730000";
         let demo_game = TriviaGame {
+            metadata: Metadata {
+                title: "Awesome Trivia Slideshow".to_string(),
+                presenter: Some("Kaden Taylor".to_string()),
+                rules: vec!["4 people per team maximum".to_string(), "no phones".to_string(), "no yelling answers".to_string()],
+                prizes: vec!["1st - BIG plastic trophy".to_string(), "2nd - smaller plastic trohpy".to_string()],
+                logo_image_source: "https://dynamic.brandcrowd.com/asset/logo/6d930c0b-9c8a-485a-b0e4-629a18c937b2/logo-search-grid-1x?logoTemplateVersion=2&v=638308718659730000".to_string(),
+            },
             rounds: vec![
                 Round {
                     title: "Current Events".to_string(),
@@ -170,16 +177,16 @@ impl App {
                     ]),
                 },
                 Round {
-                    title: "📷 Guess That Face 📷".to_string(),
+                    title: "📷 Guess That Logo 📷".to_string(),
                     rules: vec!["You will have 10 minutes".to_string()],
                     content: RoundContent::Pictures(crate::model::PictureGrid::ThreeByFive {
                         pics: [
-                            kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
-                            kaden_face, kaden_face, kaden_face, kaden_face, kaden_face, kaden_face,
-                            kaden_face, kaden_face, kaden_face,
+                            dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url,
+                            dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url, dummy_logo_url,
+                            dummy_logo_url, dummy_logo_url, dummy_logo_url,
                         ]
                         .map(|img| IdentifyPicture {
-                            answer: "Kaden's Face".to_string(),
+                            answer: "Logo Answer".to_string(),
                             source: img.to_string(),
                         }),
                     }),
@@ -195,14 +202,7 @@ impl App {
                         },
                     ]),
                 },
-            ],
-            metadata: Metadata {
-                title: "Awesome Trivia Slideshow".to_string(),
-                presenter: Some("Kaden Taylor".to_string()),
-                rules: vec!["4 people per team maximum".to_string(), "no phones".to_string(), "no yelling answers".to_string()],
-                prizes: vec!["1st - BIG plastic trophy".to_string(), "2nd - smaller plastic trohpy".to_string()],
-                logo_image_source: "https://dynamic.brandcrowd.com/asset/logo/6d930c0b-9c8a-485a-b0e4-629a18c937b2/logo-search-grid-1x?logoTemplateVersion=2&v=638308718659730000".to_string(),
-            },
+            ]
         };
         let demo_json = serde_json::to_string_pretty(&demo_game).unwrap();
         html! {
@@ -251,33 +251,3 @@ impl App {
         Msg::Files(result)
     }
 }
-
-// pub const SAMPLE_JSON: &str = r#"[
-//     {
-//       "FillInBlank": {
-//         "before": "This is a",
-//         "blank": " demo ",
-//         "after": "program for creating slideshows!"
-//       }
-//     },
-//     {
-//       "FillInBlank": {
-//         "before": "It uses",
-//         "blank": " Yew for Rust+WASM ",
-//         "after": "which means it runs in the browser!"
-//       }
-//     },
-//     {
-//       "QAndA": {
-//         "question": "Why would I need something like this?",
-//         "answer": "I regularly put together trivia shows, and this seems easier that futzing with Google Slides all the time"
-//       }
-//     },
-//     {
-//       "FillInBlank": {
-//         "before": "It came from the template",
-//         "blank": " https://github.com/yewstack/yew-trunk-minimal-template ",
-//         "after": "which means I didn't have to think about it as hard"
-//       }
-//     }
-//   ]"#;

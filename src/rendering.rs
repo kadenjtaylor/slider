@@ -121,6 +121,31 @@ impl RenderableAsHtml for Slide {
                     </slide>
                 }
             }
+            Slide::Outro {
+                major,
+                minor,
+                left_source,
+                right_source,
+            } => {
+                html! {
+                    <slide>
+                        <div style="width:100%; max-height:90%">
+                            <h1 style="font-size: 5vw; margin:auto">{major}</h1>
+                            if let Some(msg) = minor {
+                                <h1 style="font-size: 3.5vw; margin:auto">{msg}</h1>
+                            }
+                            <div style="display:flex; align-items: center; justify-content: center; padding-top: 5%">
+                                <div style="width: 50vh;">
+                                    <img src={left_source.to_string()} width="80%" style="border-radius:20px;"/>
+                                </div>
+                                <div style="width: 50vh;">
+                                    <img src={right_source.to_string()} width="80%" style="border-radius:20px;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </slide>
+                }
+            }
         }
     }
 }

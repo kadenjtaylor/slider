@@ -78,6 +78,10 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             title: "Game Rules".to_string(),
             bullets: game.metadata.rules.clone(),
         },
+        Slide::Bullets {
+            title: "Prizes".to_string(),
+            bullets: game.metadata.prizes.clone(),
+        },
     ];
     for (i, r) in game.rounds.iter().enumerate() {
         slides.push(Slide::Title {
@@ -124,13 +128,13 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
         });
         slides.extend(answers);
     }
-    slides.push(Slide::Title {
-        major: "I hope you've enjoyed".to_string(),
-        minor: Some("my slideshow".to_string()),
-    });
-    slides.push(Slide::Title {
-        major: "The END".to_string(),
-        minor: Some("https://github.com/kadenjtaylor/slider".to_string()),
+    let kaden_venmo = include_str!("../resources/kaden_venmo.txt");
+    let chelsea_venmo = include_str!("../resources/chelsea_venmo.txt");
+    slides.push(Slide::Outro {
+        major: "Thanks for playing!".to_string(),
+        minor: Some("Here's how to tip your hosts!".to_string()),
+        left_source: chelsea_venmo.to_string(),
+        right_source: kaden_venmo.to_string(),
     });
     slides
 }
