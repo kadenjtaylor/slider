@@ -71,8 +71,8 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
     let mut slides = vec![
         Slide::Preview {
             title: "Trivia Night".to_string(),
-            image_source: "https://static.wixstatic.com/media/98856d_de50ee2058794582b33bf50a532f3282~mv2_d_1800_1800_s_2.png/v1/fill/w_400,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/98856d_de50ee2058794582b33bf50a532f3282~mv2_d_1800_1800_s_2.png".to_string(),
-            categories: game.rounds.iter().map(|r| r.title.to_string()).collect()
+            image_source: game.metadata.logo_image_source.clone(),
+            categories: game.rounds.iter().map(|r| r.title.to_string()).collect(),
         },
         Slide::Bullets {
             title: "Game Rules".to_string(),
@@ -102,6 +102,19 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             RoundContent::Pictures(pics) => {
                 questions.push(Slide::PictureQuestion(pics.clone()));
                 answers.push(Slide::PictureReveal(pics.clone()));
+            }
+            RoundContent::Songs(songs) => {
+                questions.push(Slide::Title {
+                    major: "𝆕 AUDIO ONLY 𝆕".to_string(),
+                    minor: Some("Listen carefully".to_string()),
+                });
+                answers.push(Slide::Bullets {
+                    title: "Songs We Played".to_string(),
+                    bullets: songs
+                        .iter()
+                        .map(|pair| format!("{} - {}", pair.song, pair.artist))
+                        .collect(),
+                })
             }
         }
         slides.extend(questions);

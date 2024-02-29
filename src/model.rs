@@ -11,6 +11,7 @@ pub struct TriviaGame {
 pub struct Metadata {
     pub title: String,
     pub presenter: Option<String>,
+    pub logo_image_source: String,
     pub rules: Vec<String>,
     pub prizes: Vec<String>,
 }
@@ -26,6 +27,13 @@ pub struct Round {
 pub enum RoundContent {
     Questions(Vec<TriviaQuestion>),
     Pictures(PictureGrid),
+    Songs(Vec<SongArtistPair>),
+}
+
+#[derive(Debug, Serialize, Deserialize, PartialEq)]
+pub struct SongArtistPair {
+    pub song: String,
+    pub artist: String,
 }
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]

@@ -8,7 +8,9 @@ use yew::html::TargetCast;
 use yew::{html, Callback, Component, Context, Html};
 
 use crate::components::slideshow::Slideshow;
-use crate::model::{IdentifyPicture, Metadata, Round, RoundContent, TriviaGame, TriviaQuestion};
+use crate::model::{
+    IdentifyPicture, Metadata, Round, RoundContent, SongArtistPair, TriviaGame, TriviaQuestion,
+};
 
 struct FileDetails {
     name: String,
@@ -123,37 +125,52 @@ impl App {
             rounds: vec![
                 Round {
                     title: "Current Events".to_string(),
-                    rules: vec!["These are all things that happened within the last week or so".to_string()],
+                    rules: vec![],
                     content: RoundContent::Questions(vec![
                         TriviaQuestion::FillInBlank {
-                            before: "Fill in the".to_string(),
-                            blank: "blank".to_string(),
-                            after: ".".to_string(),
-                        },
-                        TriviaQuestion::FillInBlank {
-                            before: "That's my".to_string(),
-                            blank: "secret".to_string(),
-                            after: "Cap, I'm always angry.".to_string(),
+                            before: "Did you hear? ".to_string(),
+                            blank: "EVERYONE".to_string(),
+                            after: " is getting married!".to_string(),
                         },
                         TriviaQuestion::QAndA {
-                            question: "What is the airspeed velocity of an unladen swallow?"
+                            question: "Who is having kids?"
                                 .to_string(),
-                            answer: "What kind? African or European?".to_string(),
+                            answer: "EVERYONE".to_string(),
                         },
                     ]),
                 },
                 Round {
-                    title: "Name that Tune".to_string(),
-                    rules: vec![],
-                    content: RoundContent::Questions(vec![]),
+                    title: "𝆕 Name that Tune 𝆕".to_string(),
+                    rules: vec![
+                        "One point per song".to_string(),
+                        "One point for an artist listed on the track".to_string(),
+                        "No additional points for additional artists".to_string(),
+                        "NO PHONES!".to_string()
+                    ],
+                    content: RoundContent::Songs(vec![
+                        SongArtistPair{
+                            song: "Spinning".to_string(),
+                            artist: "Jack's Mannequin".to_string()
+                        },
+                        SongArtistPair {
+                            song: "Piano Man".to_string(),
+                            artist: "Billy Joel".to_string()
+                        }
+                    ]),
                 },
                 Round {
                     title: "Random".to_string(),
                     rules: vec![],
-                    content: RoundContent::Questions(vec![]),
+                    content: RoundContent::Questions(vec![
+                        TriviaQuestion::QAndA {
+                            question: "Are ya ready, kids?!?"
+                                .to_string(),
+                            answer: "Aye Aye, Captain!".to_string(),
+                        },
+                    ]),
                 },
                 Round {
-                    title: "Guess That Face".to_string(),
+                    title: "📷 Guess That Face 📷".to_string(),
                     rules: vec!["You will have 10 minutes".to_string()],
                     content: RoundContent::Pictures(crate::model::PictureGrid::ThreeByFive {
                         pics: [
@@ -168,16 +185,23 @@ impl App {
                     }),
                 },
                 Round {
-                    title: "Theme Round".to_string(),
+                    title: "Blue Things".to_string(),
                     rules: vec![],
-                    content: RoundContent::Questions(vec![]),
+                    content: RoundContent::Questions(vec![
+                        TriviaQuestion::QAndA {
+                            question: "Which actor was painted blue in the movie Big Fat Liar?"
+                                .to_string(),
+                            answer: "Paul Giamatti".to_string(),
+                        },
+                    ]),
                 },
             ],
             metadata: Metadata {
-                title: "Burger Planet Tivia".to_string(),
+                title: "Awesome Trivia Slideshow".to_string(),
                 presenter: Some("Kaden Taylor".to_string()),
-                rules: vec!["6 people per team maximum".to_string()],
-                prizes: vec!["winner take all".to_string()],
+                rules: vec!["4 people per team maximum".to_string(), "no phones".to_string(), "no yelling answers".to_string()],
+                prizes: vec!["1st - BIG plastic trophy".to_string(), "2nd - smaller plastic trohpy".to_string()],
+                logo_image_source: "https://dynamic.brandcrowd.com/asset/logo/6d930c0b-9c8a-485a-b0e4-629a18c937b2/logo-search-grid-1x?logoTemplateVersion=2&v=638308718659730000".to_string(),
             },
         };
         let demo_json = serde_json::to_string_pretty(&demo_game).unwrap();

@@ -108,7 +108,7 @@ impl RenderableAsHtml for Slide {
                         <div style="width:100%; max-height:90%">
                             <h1 style="font-size: 7vw; margin:auto">{title}</h1>
                             <div style="display:flex; align-items: center">
-                                <div style="width: 50%; float: left;">
+                                <div style="width: 40%; float: left;">
                                     <img src={image_source.to_string()} width="80%"/>
                                 </div>
                                 <div style="text-align: left; padding-left:3%; font-size: 4vw">
