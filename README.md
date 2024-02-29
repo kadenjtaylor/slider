@@ -15,7 +15,7 @@ There's also the `trunk watch` command which does the same thing but without hos
 ### Release
 
 ```bash
-trunk build --release
+trunk build --release --public-url="./" --filehash=false
 ```
 
 This builds the app in release mode similar to `cargo build --release`.
