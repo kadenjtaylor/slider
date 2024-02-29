@@ -1,6 +1,5 @@
 use std::iter;
 
-use gloo::console::console_dbg;
 use yew::prelude::*;
 
 use crate::model::{IdentifyPicture, PictureGrid, Slide, TriviaQuestion};
@@ -108,10 +107,10 @@ impl RenderableAsHtml for Slide {
                         <div style="width:100%; max-height:90%">
                             <h1 style="font-size: 7vw; margin:auto">{title}</h1>
                             <div style="display:flex; align-items: center">
-                                <div style="width: 40%; float: left;">
+                                <div style="width: 45%; float: left;">
                                     <img src={image_source.to_string()} width="80%"/>
                                 </div>
-                                <div style="text-align: left; padding-left:3%; font-size: 4vw">
+                                <div style="text-align: left; padding-left:3%; font-size: 3vw">
                                     <ul>
                                         { for categories.iter().map(render_item) }
                                     </ul>
@@ -160,7 +159,6 @@ fn render_picture_grid(pics: &PictureGrid, reveal: bool) -> Html {
         PictureGrid::ThreeByFour { pics } => (4, pics.to_vec()),
         PictureGrid::ThreeByFive { pics } => (5, pics.to_vec()),
     };
-    console_dbg!(columns);
     html! {
         <div class={"grid"} style={ format!("--columns:{}", columns) }>
             { for pics.iter().enumerate().map(|(i, ip)| html!{
