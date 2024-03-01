@@ -88,9 +88,9 @@ impl RenderableAsHtml for Slide {
                     <slide>
                         <bullets>
                             <h1>{ title }</h1>
-                                <ul>
+                                <ol>
                                     { for bullets.iter().map(render_item) }
-                                </ul>
+                                </ol>
                         </bullets>
                     </slide>
                 }
