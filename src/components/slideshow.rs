@@ -3,7 +3,7 @@ use gloo::events::EventListener;
 use yew::prelude::*;
 
 use crate::{
-    model::{RoundContent, Slide, SongArtistPair, TriviaGame},
+    model::{RoundContent, Slide, TriviaGame},
     rendering::RenderableAsHtml,
 };
 use wasm_bindgen::JsCast;
@@ -131,6 +131,22 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
             minor: None,
         });
         slides.extend(answers);
+        if game
+            .metadata
+            .breaks_after
+            .iter()
+            .map(|i| i - 1)
+            .collect::<Vec<usize>>()
+            .contains(&i)
+        {
+            slides.push(Slide::Title {
+                major: "Quick Break!".to_string(),
+                minor: Some(format!(
+                    "See you back in {} minutes",
+                    game.metadata.break_duration_minutes
+                )),
+            });
+        }
     }
     let kaden_venmo = include_str!("../resources/kaden_venmo.txt");
     let chelsea_venmo = include_str!("../resources/chelsea_venmo.txt");

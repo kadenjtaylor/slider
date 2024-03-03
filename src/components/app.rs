@@ -128,6 +128,8 @@ impl App {
                 rules: vec!["4 people per team maximum".to_string(), "no phones".to_string(), "no yelling answers".to_string()],
                 prizes: vec!["1st - BIG plastic trophy".to_string(), "2nd - smaller plastic trohpy".to_string()],
                 logo_image_source: "https://dynamic.brandcrowd.com/asset/logo/6d930c0b-9c8a-485a-b0e4-629a18c937b2/logo-search-grid-1x?logoTemplateVersion=2&v=638308718659730000".to_string(),
+                breaks_after: vec![2, 4],
+                break_duration_minutes: 5
             },
             rounds: vec![
                 Round {

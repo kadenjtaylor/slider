@@ -14,6 +14,8 @@ pub struct Metadata {
     pub logo_image_source: String,
     pub rules: Vec<String>,
     pub prizes: Vec<String>,
+    pub breaks_after: Vec<usize>,
+    pub break_duration_minutes: usize
 }
 
 #[derive(Deserialize, Serialize, PartialEq, Properties)]
@@ -84,7 +86,7 @@ pub enum Slide {
     SongsReveal {
         title: String,
         left_block: Vec<String>,
-        right_block: Vec<String>
+        right_block: Vec<String>,
     },
     Outro {
         major: String,
