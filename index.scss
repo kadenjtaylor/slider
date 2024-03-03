@@ -20,7 +20,8 @@ main {
 }
 
 slide {
-  width: 80%;
+  height: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   text-align: center;
@@ -90,13 +91,17 @@ bullets {
   font-size: 3.5vw;
 }
 
+songs {
+  text-align: left;
+  font-size: 2.5vw;
+}
+
 //-------
 
 * {
   box-sizing: border-box;
   color: whitesmoke;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  overflow-wrap: anywhere;
 }
 
 p {
@@ -106,6 +111,7 @@ p {
 h2 {
   text-align: center;
   margin: 50px;
+  font-size: 4cqw;
 }
 
 label {

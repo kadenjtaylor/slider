@@ -104,14 +104,15 @@ impl RenderableAsHtml for Slide {
             } => {
                 html! {
                     <slide>
-                        <div style="width:100%; max-height:90%">
-                            <h1 style="font-size: 7vw; margin:auto">{title}</h1>
-                            <div style="display:flex; align-items: center">
+                        <div>
+                            <h1 style="font-size: 8vw; margin:auto">{title}</h1>
+                            <div style="display:flex; align-items: center; width 100%">
                                 <div style="width: 45%; float: left;">
-                                    <img src={image_source.to_string()} width="80%"/>
+                                    <img src={image_source.to_string()} style="width: 100%; "/>
                                 </div>
-                                <div style="text-align: left; padding-left:3%; font-size: 3vw">
-                                    <ul>
+                                <div style="text-align: left; font-size: 3vw">
+                                    {"Categories:"}
+                                    <ul style="padding-left: 4vw">
                                         { for categories.iter().map(render_item) }
                                     </ul>
                                 </div>
@@ -134,12 +135,37 @@ impl RenderableAsHtml for Slide {
                                 <h1 style="font-size: 3.5vw; margin:auto">{msg}</h1>
                             }
                             <div style="display:flex; align-items: center; justify-content: center; padding-top: 5%">
-                                <div style="width: 50vh;">
+                                <div style="width: 45%; float: left;">
                                     <img src={left_source.to_string()} width="80%" style="border-radius:20px;"/>
                                 </div>
                                 <div style="width: 50vh;">
                                     <img src={right_source.to_string()} width="80%" style="border-radius:20px;"/>
                                 </div>
+                            </div>
+                        </div>
+                    </slide>
+                }
+            }
+            Slide::SongsReveal {
+                title,
+                left_block,
+                right_block,
+            } => {
+                html! {
+                    <slide>
+                        <div>
+                            <h1 style="margin:auto">{ title }</h1>
+                            <div  style="display:flex; align-items: center; justify-content: center;">
+                                <songs style="margin-right:3%">
+                                    <ol>
+                                        { for left_block.iter().map(render_item) }
+                                    </ol>
+                                </songs>
+                                <songs style="margin-left:3%">
+                                    <ol start={format!("{}", left_block.len() + 1)}>
+                                        { for right_block.iter().map(render_item) }
+                                    </ol>
+                                </songs>
                             </div>
                         </div>
                     </slide>

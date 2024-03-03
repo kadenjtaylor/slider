@@ -81,6 +81,11 @@ pub enum Slide {
     Reveal(usize, TriviaQuestion),
     PictureQuestion(PictureGrid),
     PictureReveal(PictureGrid),
+    SongsReveal {
+        title: String,
+        left_block: Vec<String>,
+        right_block: Vec<String>
+    },
     Outro {
         major: String,
         minor: Option<String>,

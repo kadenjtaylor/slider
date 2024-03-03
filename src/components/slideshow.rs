@@ -3,7 +3,7 @@ use gloo::events::EventListener;
 use yew::prelude::*;
 
 use crate::{
-    model::{RoundContent, Slide, TriviaGame},
+    model::{RoundContent, Slide, SongArtistPair, TriviaGame},
     rendering::RenderableAsHtml,
 };
 use wasm_bindgen::JsCast;
@@ -112,12 +112,16 @@ fn to_slides(game: &TriviaGame) -> Vec<Slide> {
                     major: "𝆕 AUDIO ONLY 𝆕".to_string(),
                     minor: Some("Listen carefully".to_string()),
                 });
-                answers.push(Slide::Bullets {
-                    title: "Songs We Played".to_string(),
-                    bullets: songs
-                        .iter()
-                        .map(|pair| format!("{} - {}", pair.song, pair.artist))
-                        .collect(),
+                let mut songs: Vec<String> = songs
+                    .iter()
+                    .map(|pair| format!("{} - {}", pair.song, pair.artist))
+                    .collect();
+                let split = songs.len() / 2;
+                let right_half = songs.split_off(split);
+                answers.push(Slide::SongsReveal {
+                    title: r.title.to_string(),
+                    left_block: songs,
+                    right_block: right_half,
                 })
             }
         }
