@@ -156,7 +156,7 @@ impl RenderableAsHtml for Slide {
                         <div>
                             <h1 style="margin:auto">{ title }</h1>
                             <div  style="display:flex; align-items: center; justify-content: center;">
-                                <songs style="margin-right:3%">
+                                <songs style="width:50%; margin-right:3%">
                                     <ol>
                                         { for left_block.iter().map(render_item) }
                                     </ol>
